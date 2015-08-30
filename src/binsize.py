@@ -2,7 +2,44 @@
 Calculate the optimum bin sizes to fit the selcal tone assignments
   
 '''
+import bidict
 import math
+
+class Tones(object):
+    """
+    The selcal tone definitions
+    """
+    RED = bidict(
+        # Designation: Frequency (Hz)
+        'Alpha'=312.6,
+        'Bravo'=346.7,
+        'Charlie'=384.6,
+        'Delta'=426.6,
+        'Echo'=473.2,
+        'Foxtrot'=524.8,
+        'Golf'=582.1,
+        'Hotel'=645.7,
+        'Juliet'=716.1,
+        'Kilo'=794.3,
+        'Lima'=881.0,
+        'Mike'=977.2,
+        'Papa'=1083.9,
+        'Quebec'=1202.3,
+        'Romeo'=1333.5,
+        'Sierra'=1479.1,)
+
+    def freq(self, desig):
+        """
+        :return: The frequency assigned to the given designator
+        """
+        return Tones.RED[desig]
+
+    def tone(self, freq):
+        """
+        :return: The designator for the given frequency
+        """
+        try:
+            return Tones.RED[:freq]
 
 class SelcalParams:
     """

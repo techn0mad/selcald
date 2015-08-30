@@ -135,7 +135,7 @@ fN = log-1 / 0.045 (N-1) + 2.00/. For the first tone, N=12, second N=13, etc.
 
 <table>
 <tr>
-<th>Designation</th><th>Log</th><th>Frequency (Hz)</th>
+<th>Designation</th><th>Log Frequency</th><th>Frequency (Hz)</th>
 </tr>
 <tr>
 <td>A</td><td>2.495</td><td>312.6</td>
