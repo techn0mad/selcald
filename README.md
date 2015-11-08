@@ -57,6 +57,12 @@ of one transmitted code without repetition.
 The frequency of transmitted codes should be held to +/- 0.15% tolerance to 
 insure proper operation of the airborne decoder.
 
+NOTE: The specification does not indicate the required frequency accuracy of
+the receiver. Given that research[3][4] seems to show that doppler spreads of 
+5-20 Hz over polar paths are possible, it seems that as a practical matter, 
+the receiver frequency tolerances have to be more relaxed than the transmitter 
+frequency tolerances.
+
 ### Distortion
 
 Overall audio distortion present on the transmitted RF signal should not 
@@ -77,56 +83,23 @@ are designated by letter as indicated:
 Note: The tones are spaced by log-1 0.045 (approximately 10.9%)
 
 <table>
-<th>Designation</th><th>Frequency (Hz)</th>
-</tr>
-<tr>
-<td>A</td><td>312.6</td>
-</tr>
-<tr>
-<td>B</td><td>346.7</td>
-</tr>
-<tr>
-<td>C</td><td>384.6</td>
-</tr>
-<tr>
-<td>D</td><td>426.6</td>
-</tr>
-<tr>
-<td>E</td><td>473.2</td>
-</tr>
-<tr>
-<td>F</td><td>524.8</td>
-</tr>
-<tr>
-<td>G</td><td>582.1</td>
-</tr>
-<tr>
-<td>H</td><td>645.7</td>
-</tr>
-<tr>
-<td>J</td><td>716.1</td>
-</tr>
-<tr>
-<td>K</td><td>794.3</td>
-</tr>
-<tr>
-<td>L</td><td>881.0</td>
-</tr>
-<tr>
-<td>M</td><td>977.2</td>
-</tr>
-<tr>
-<td>P</td><td>1083.9</td>
-</tr>
-<tr>
-<td>Q</td><td>1202.3</td>
-</tr>
-<tr>
-<td>R</td><td>1333.5</td>
-</tr>
-<tr>
-<td>S</td><td>1479.1</td>
-</tr>
+<th>Designation</th><th>Nominal Frequency (Hz)</th><th>Minimum</th><th>Maximum</th><th>Width</th>
+<tr><td>A</td><td>312.60</td><td>312.13</td><td>313.07</td><td>0.94</td></tr>
+<tr><td>B</td><td>346.70</td><td>346.18</td><td>347.22</td><td>1.04</td></tr>
+<tr><td>C</td><td>384.60</td><td>384.02</td><td>385.18</td><td>1.15</td></tr>
+<tr><td>D</td><td>426.60</td><td>425.96</td><td>427.24</td><td>1.28</td></tr>
+<tr><td>E</td><td>473.20</td><td>472.49</td><td>473.91</td><td>1.42</td></tr>
+<tr><td>F</td><td>524.80</td><td>524.01</td><td>525.59</td><td>1.57</td></tr>
+<tr><td>G</td><td>582.10</td><td>581.23</td><td>582.97</td><td>1.75</td></tr>
+<tr><td>H</td><td>645.70</td><td>644.73</td><td>646.67</td><td>1.94</td></tr>
+<tr><td>J</td><td>716.10</td><td>715.03</td><td>717.17</td><td>2.15</td></tr>
+<tr><td>K</td><td>794.30</td><td>793.11</td><td>795.49</td><td>2.38</td></tr>
+<tr><td>L</td><td>881.00</td><td>879.68</td><td>882.32</td><td>2.64</td></tr>
+<tr><td>M</td><td>977.20</td><td>975.73</td><td>978.67</td><td>2.93</td></tr>
+<tr><td>P</td><td>1,083.90</td><td>1,082.27</td><td>1,085.53</td><td>3.25</td></tr>
+<tr><td>Q</td><td>1,202.30</td><td>1,200.50</td><td>1,204.10</td><td>3.61</td></tr>
+<tr><td>R</td><td>1,333.50</td><td>1,331.50</td><td>1,335.50</td><td>4.00</td></tr>
+<tr><td>S</td><td>1,479.10</td><td>1,476.88</td><td>1,481.32</td><td>4.44</td></tr>
 </table>
 
 ### Table of Tone Frequencies and Derivation of the Frequencies
@@ -238,4 +211,5 @@ References
 ----------
 [1]: http://www.asri.aero/our-services/selcal/ "Aviation Spectrum Resources Inc. website, retrieved 3, Nov 2013"
 [2]: "ARINC Characteristic 714-6-1990, chapter 2; August 15, 1990"
-
+[3]: "Propagation of HF radio waves over northerly paths: measurements, simulation and systems aspects", Warrington et al
+[4]: Stocker, A. J., E. M. Warrington, and D. R. Siddle (2013), Observations of Doppler and delay spreads on HF signals received over polar cap and trough paths at various stages of the solar cycle, Radio Sci., 48, 638–645, doi:10.1002/2013RS005264.
