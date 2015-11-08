@@ -221,6 +221,11 @@ binary number) and a post-processing sample rate of 2048/44100 or 46.4 mS. This 
 that we need to window this sample size appropriately and choose an algorithm for tone
 detection that is "comfortable" with this block size.
 
+After considerable trolling through the Internet, and discarding many approaches
+(see above) that are oriented toward detecting _unknown_ tones, it seems that 
+theoretically, the ideal approach is to use convolution of the input signal with
+_known_ signals to detect their presence, otherwise known as matched filtering.
+
 The normal source of sampled audio is the soundcard interface. 
 After some digging, it seems that PortAudio would be a good choice for an audio interface
 API, since it provides both a degree of platform independence and isolates the application
@@ -231,19 +236,27 @@ as are fixed point DSP implementations versus floating point implementations.
 ### Pseudocode
 
     Calculate numnber of samples per block size (<= 50 mS)
+    For each tone in the alphabet
+      Generate the template signal for convolution
     While true
       Clear signal table
       set signal table row to 0
       read audio samples for one block
       apply windowing function to block
       apply bandpass filter to block
-      perform time to frequency conversion of samples
+      For each tone in the alphabet
+        Convolve the input signal with the template for the tone
+        If the convolution reaches the detection threshold
+          Then this letter in the alphabet has been detected
       add tones detected to signal table
       if two tones detected
         For remaining number of blocks
           increment signal table row
           read audio samples for one block
-          perform time to frequency conversion of samples
+          For each tone in the alphabet
+            Convolve the input signal with the template for the tone
+            If the convolution reaches the detection threshold
+              Then this letter in the alphabet has been detected
           add tones detected to signal table
         Read signal table and determine selcal code
 
