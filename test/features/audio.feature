@@ -6,15 +6,23 @@ Feature: Selcal Decoding
     Scenario: Streaming audio
         Given I have a source of streaming audio at <Rate> kpbs
         When I use it as input
-        Then I should get audio samples for processing every 100 mS
+        And I request a block of audio samples
+        Then I should get audio samples
 
     Scenario: Audio files
         Given I have recorded audio in file <Name>
-        When I use it as imput
-        Then I should get audio samples for processing every 100 mS
+        When I use it as input
+        And I request a block of audio samples
+        Then I should get audio samples
+
+    Scenario: Sample rate
+        Given I have a source of audio samples
+        When I use it as input
+        And I request the sample rate
+        Then I should get the sample rate of the audio samples
 
     Scenario Outline: Tone detection
-        Given I have a 100 mS audio sample containing tone <Designator>
+        Given I have an audio sample containing tone <Designator>
         When I process it
         Then I should detect the tone <Frequency> +/- 0.15%
         Examples: Designators
@@ -37,19 +45,26 @@ Feature: Selcal Decoding
         | Sierra        | 1479.1    |
 
     Scenario Outline: Silence detection
-        Given I have a 100 mS audio sample containing no tones
+        Given I have audio samples containing energy but no tones of <Duration> mS long
         When I process it
-        Then I should detect no tones
+        Then I should detect <Silence>
+        Examples: Silence
+        | Duration | Silence |
+        | 50 mS    | No      |
+        | 100 mS   | Yes     |
+        | 200 mS   | Yes     |
+        | 300 mS   | Yes     |
+        | 350 mS   | No      |
 
-    Scenario Outline: Pulse
-        Given I have 15 100 mS audio samples
-        And I detect silence in two consecutive samples
-        And I detect the same two tones <A> and <B> in more than 7 and less than 13 consecutive samples
-        Then I have detected a Pulse
+    Scenario Outline: Tone group
+        Given I have at least 850 mS of audio samples
+        And I detect at least 100 mS of silence at the end of the samples
+        And I detect the same two tones <A> and <B> in more than 50% of the samples preceding the silence
+        Then I have detected a Tone group
 
     Scenario Outline: Selcal
-        Given I have detected pulses <One> and <Two>
-        And pulse <One> contains tones <A> and <B>
-        And pulse <Two> contains tones <C> and <D>
+        Given I have detected Tone groups <One> and <Two>
+        And Tone group <One> contains tones <A> and <B>
+        And Tone group <Two> contains tones <C> and <D>
         And tones <A>, <B>, <C>, <D> are all different
         Then the selcal <A><B>-<C><D> has been detected

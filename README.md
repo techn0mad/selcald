@@ -172,6 +172,7 @@ this has been well documented. There are several approaches available:
 5. MUSIC algorithm (see <https://en.wikipedia.org/wiki/Multiple_signal_classification>)
 6. ESPRIT algorithm (see <https://en.wikipedia.org/wiki/Estimation_of_signal_parameters_via_rotational_invariance_techniques>)
 7. Wavelet transform and convolution (seems highly advanced)
+8. Q Transform (handles geometric spacing of tones/bins much better)
 
 The implementation should take into account characteristics of the HF radio medium:
 
@@ -181,7 +182,22 @@ The implementation should take into account characteristics of the HF radio medi
 
 These imply that unlike DTMF decoder implementations, a series of measurements should 
 be made during the signal and a final decision determined from statistical analysis 
-of the raw measurements.
+of the raw measurements. Based on the highest baseband frequency of approximately
+1500 Hz, this means that any audio sampling rate above 4000 samples/second should work
+fine. Looking at the post-detection stage, we can see that the gap between the two tone 
+groups is specified as 200 mS +/- 100 mS, so in the worst case, the gap could be 100 mS. 
+Following Nyquist and sampling theory, this means that in that 100 mS period, we need to
+check for the presence or absence of signal at least twice, or once every 50 mS. The actual
+numbers will vary based on audio sampling rates, but for the typical 44100 samples/second
+rate of modern sound cards, this leads us to use a block size of 2048 (using a nice round
+binary number) and a post-processing sample rate of 2048/44100 or 46.4 mS. This also means
+that we need to window this sample size appropriately and choose an algorithm for tone
+detection that is "comfortable" with this block size.
+
+After considerable trolling through the Internet, and discarding many approaches
+(see above) that are oriented toward detecting _unknown_ tones, it seems that 
+theoretically, the ideal approach is to use convolution of the input signal with
+_known_ signals to detect their presence, otherwise known as matched filtering.
 
 The normal source of sampled audio is the soundcard interface. 
 After some digging, it seems that PortAudio would be a good choice for an audio interface
@@ -192,18 +208,28 @@ as are fixed point DSP implementations versus floating point implementations.
 
 ### Pseudocode
 
-    Calculate numnber of samples per interval
+    Calculate numnber of samples per block size (<= 50 mS)
+    For each tone in the alphabet
+      Generate the template signal for convolution
     While true
       Clear signal table
       set signal table row to 0
-      read audio samples for one interval
-      perform time to frequency conversion of samples
+      read audio samples for one block
+      apply windowing function to block
+      apply bandpass filter to block
+      For each tone in the alphabet
+        Convolve the input signal with the template for the tone
+        If the convolution reaches the detection threshold
+          Then this letter in the alphabet has been detected
       add tones detected to signal table
       if two tones detected
-        For remaining number of intervals
+        For remaining number of blocks
           increment signal table row
-          read audio samples for one interval
-          perform time to frequency conversion of samples
+          read audio samples for one block
+          For each tone in the alphabet
+            Convolve the input signal with the template for the tone
+            If the convolution reaches the detection threshold
+              Then this letter in the alphabet has been detected
           add tones detected to signal table
         Read signal table and determine selcal code
 
