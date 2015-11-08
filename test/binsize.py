@@ -9,24 +9,24 @@ class Tones(object):
     """
     The selcal tone definitions
     """
-    RED = bidict(
+    RED = bidict.bidict(
         # Designation: Frequency (Hz)
-        'Alpha'=312.6,
-        'Bravo'=346.7,
-        'Charlie'=384.6,
-        'Delta'=426.6,
-        'Echo'=473.2,
-        'Foxtrot'=524.8,
-        'Golf'=582.1,
-        'Hotel'=645.7,
-        'Juliet'=716.1,
-        'Kilo'=794.3,
-        'Lima'=881.0,
-        'Mike'=977.2,
-        'Papa'=1083.9,
-        'Quebec'=1202.3,
-        'Romeo'=1333.5,
-        'Sierra'=1479.1,)
+        Alpha=312.6,
+        Bravo=346.7,
+        Charlie=384.6,
+        Delta=426.6,
+        Echo=473.2,
+        Foxtrot=524.8,
+        Golf=582.1,
+        Hotel=645.7,
+        Juliet=716.1,
+        Kilo=794.3,
+        Lima=881.0,
+        Mike=977.2,
+        Papa=1083.9,
+        Quebec=1202.3,
+        Romeo=1333.5,
+        Sierra=1479.1,)
 
     def freq(self, desig):
         """
@@ -40,6 +40,8 @@ class Tones(object):
         """
         try:
             return Tones.RED[:freq]
+        except:
+            pass
 
 class SelcalParams:
     """
@@ -106,7 +108,7 @@ class SelcalParams:
         for tone in range(len(self.selcal_tones)):
             self.bin_center[tone] = ((1.0 * int(self.selcal_tones[tone] / binsize)) + 0.5) * binsize
             bin_err = self.selcal_tones[tone] - self.bin_center[tone]
-            print "Tone: ", tone, " freq: ", self.selcal_tones[tone], " bin: ", self.bin_center[tone], " err: ", bin_err
+            print "Tone: ", tone, " freq: ", self.selcal_tones[tone], " bin: ", self.bin_center[tone], " err: ", bin_err, " tol: ", self.selcal_tones[tone] * self.log_tone_tolerance
         print
  
     def search_err(self, upper_bound):
