@@ -12,8 +12,8 @@ def note(freq, len, amp=1, rate=8000):
 #sig = np.repeat([0., 1., 1., 0., 1., 0., 0., 1.], 128)
 sig = np.concatenate( (np.zeros(200), note(1000, 0.05) ) )
 sig = np.concatenate( (sig, np.zeros(50) ) )
-sig_noise = 0.20 * sig + 0.80 * np.random.randn(len(sig))
-corr = signal.correlate(sig_noise, sig, mode='same')
+sig_noise = 0.33 * sig + 0.67 * np.random.randn(len(sig))
+corr = signal.correlate(sig_noise, note(1000, 0.08), mode='same')
 
 clock = np.arange(50, len(sig), 100)
 fig, (ax_orig, ax_noise, ax_corr) = plt.subplots(3, 1, sharex=True)
