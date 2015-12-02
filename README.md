@@ -203,8 +203,8 @@ References
 ----------
 [1]: http://www.asri.aero/our-services/selcal/ "Aviation Spectrum Resources Inc. website, retrieved 3, Nov 2013"
 
-[2]: "ARINC Characteristic 714-6-1990, chapter 2; August 15, 1990"
+[2]: http://store.aviation-ia.com/cf/store/catalog_detail.cfm?item_id=126 "ARINC Characteristic 714-6-1990, chapter 2; August 15, 1990"
 
-[3]: "Propagation of HF radio waves over northerly paths: measurements, simulation and systems aspects", Warrington et al
+[3]: https://lra.le.ac.uk/bitstream/2381/7403/3/propagation%20of%20HF%20radio%20waves.pdf "Propagation of HF radio waves over northerly paths: measurements, simulation and systems aspects", Warrington et al
 
-[4]: "Observations of Doppler and delay spreads on HF signals received over polar cap and trough paths at various stages of the solar cycle", Stocker, A. J., E. M. Warrington, and D. R. Siddle (2013), Radio Sci., 48, 638–645, doi:10.1002/2013RS005264.
+[4]: http://onlinelibrary.wiley.com/doi/10.1002/2013RS005264/full "Observations of Doppler and delay spreads on HF signals received over polar cap and trough paths at various stages of the solar cycle", Stocker, A. J., E. M. Warrington, and D. R. Siddle (2013), Radio Sci., 48, 638–645, doi:10.1002/2013RS005264.
