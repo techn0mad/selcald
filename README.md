@@ -57,8 +57,8 @@ of one transmitted code without repetition.
 The frequency of transmitted codes should be held to +/- 0.15% tolerance to 
 insure proper operation of the airborne decoder.
 
-*NOTE:* The specification does not indicate the required frequency accuracy of
-the receiver. Given that [research][3] [4] seems to show that doppler spreads of 
+**NOTE:** The specification does not indicate the required frequency accuracy of
+the receiver. Given that [research][3] seems to [show][4] that doppler spreads of 
 5-20 Hz over polar paths are possible, it seems that as a practical matter, 
 the receiver frequency tolerances have to be more relaxed than the transmitter 
 frequency tolerances.
@@ -162,8 +162,15 @@ detection that is "comfortable" with this block size.
 
 After considerable trolling through the Internet, and discarding many approaches
 (see above) that are oriented toward detecting _unknown_ tones, it seems that 
-theoretically, the ideal approach is to use convolution of the input signal with
-_known_ signals to detect their presence, otherwise known as matched filtering.
+theoretically, the ideal approach is to use [cross-correlation][5] of the input signal with
+_known_ signals to detect their presence, otherwise known as [matched filtering][6].
+
+Some care must be taken in selecting the block size, as it is a tradeoff between 
+integrating more signal power to improve cross-correlation detection, and added 
+difficulty in detecting the silent period between the tone groups. As mentioned 
+earlier, presumably for direct detection of the shortest possible silent period, 
+blocks should be less than 50 mS, but this would result in requiring detection 
+based on only 15 cycles (312.6 Hz * 0.05 sec) for the lowest frequency tone.
 
 The normal source of sampled audio is the soundcard interface. 
 After some digging, it seems that PortAudio would be a good choice for an audio interface
@@ -174,9 +181,9 @@ as are fixed point DSP implementations versus floating point implementations.
 
 ### Pseudocode
 
-    Calculate numnber of samples per block size (<= 50 mS)
+    Calculate number of samples per block size (<= 50 mS)
     For each tone in the alphabet
-      Generate the template signal for convolution
+      Generate the template signal for cross-correlation
     While true
       Clear signal table
       set signal table row to 0
@@ -185,7 +192,7 @@ as are fixed point DSP implementations versus floating point implementations.
       apply bandpass filter to block
       For each tone in the alphabet
         Convolve the input signal with the template for the tone
-        If the convolution reaches the detection threshold
+        If the cross-correlation reaches the detection threshold
           Then this letter in the alphabet has been detected
       add tones detected to signal table
       if two tones detected
@@ -194,7 +201,7 @@ as are fixed point DSP implementations versus floating point implementations.
           read audio samples for one block
           For each tone in the alphabet
             Convolve the input signal with the template for the tone
-            If the convolution reaches the detection threshold
+            If the cross-correlation reaches the detection threshold
               Then this letter in the alphabet has been detected
           add tones detected to signal table
         Read signal table and determine selcal code
@@ -208,3 +215,7 @@ References
 [3]: https://lra.le.ac.uk/bitstream/2381/7403/3/propagation%20of%20HF%20radio%20waves.pdf "Propagation of HF radio waves over northerly paths: measurements, simulation and systems aspects, Warrington et al"
 
 [4]: http://onlinelibrary.wiley.com/doi/10.1002/2013RS005264/full "Observations of Doppler and delay spreads on HF signals received over polar cap and trough paths at various stages of the solar cycle, Stocker, A. J., E. M. Warrington, and D. R. Siddle (2013), Radio Sci., 48, 638–645, doi:10.1002/2013RS005264"
+
+[5]: https://en.wikipedia.org/wiki/Autocorrelation "Autocorrelation"
+
+[6]: https://en.wikipedia.org/wiki/Matched_filter "Matched filter"
