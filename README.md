@@ -172,6 +172,8 @@ earlier, presumably for direct detection of the shortest possible silent period,
 blocks should be less than 50 mS, but this would result in requiring detection 
 based on only 15 cycles (312.6 Hz * 0.05 sec) for the lowest frequency tone.
 
+![Cross-correlation demonstration](cross-correlation.png "Demonstration of cross-correlation")
+
 The normal source of sampled audio is the soundcard interface. 
 After some digging, it seems that PortAudio would be a good choice for an audio interface
 API, since it provides both a degree of platform independence and isolates the application
