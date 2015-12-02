@@ -10,7 +10,7 @@ emits a timestamp, followed by the selcal code received. The daemon is
 intended to be as simple and lightweight as possible, and should rely 
 on existing frameworks such as fftw where possible.
 
-Selective Calling (SELCAL)[1]
+[Selective Calling (SELCAL)][1]
 --------------------------
 
 SELCAL is a technique that allows a ground radio operator to alert an 
@@ -29,7 +29,7 @@ otherwise alerting the crew. The crew will then set their volume control
 higher to listen to the voice traffic and, using ICAO recommended radio 
 procedures, assure that the message is intended for them.
 
-Selcal Specification[2]
+[Selcal Specification][2]
 --------------------
 The official specification for the selcal system is found in 
 "ARINC Characteristic 714-6-1990", published on August 15, 1990. The key 
@@ -57,8 +57,8 @@ of one transmitted code without repetition.
 The frequency of transmitted codes should be held to +/- 0.15% tolerance to 
 insure proper operation of the airborne decoder.
 
-NOTE: The specification does not indicate the required frequency accuracy of
-the receiver. Given that research[3][4] seems to show that doppler spreads of 
+*NOTE:* The specification does not indicate the required frequency accuracy of
+the receiver. Given that [research][3][4] seems to show that doppler spreads of 
 5-20 Hz over polar paths are possible, it seems that as a practical matter, 
 the receiver frequency tolerances have to be more relaxed than the transmitter 
 frequency tolerances.
