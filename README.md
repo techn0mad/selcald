@@ -82,25 +82,25 @@ are designated by letter as indicated:
 
 Note: The tones are spaced by log-1 0.045 (approximately 10.9%)
 
-<table>
-<th>Designation</th><th>Nominal Frequency (Hz)</th><th>Minimum</th><th>Maximum</th><th>Width</th>
-<tr><td>A</td><td>312.60</td><td>312.13</td><td>313.07</td><td>0.94</td></tr>
-<tr><td>B</td><td>346.70</td><td>346.18</td><td>347.22</td><td>1.04</td></tr>
-<tr><td>C</td><td>384.60</td><td>384.02</td><td>385.18</td><td>1.15</td></tr>
-<tr><td>D</td><td>426.60</td><td>425.96</td><td>427.24</td><td>1.28</td></tr>
-<tr><td>E</td><td>473.20</td><td>472.49</td><td>473.91</td><td>1.42</td></tr>
-<tr><td>F</td><td>524.80</td><td>524.01</td><td>525.59</td><td>1.57</td></tr>
-<tr><td>G</td><td>582.10</td><td>581.23</td><td>582.97</td><td>1.75</td></tr>
-<tr><td>H</td><td>645.70</td><td>644.73</td><td>646.67</td><td>1.94</td></tr>
-<tr><td>J</td><td>716.10</td><td>715.03</td><td>717.17</td><td>2.15</td></tr>
-<tr><td>K</td><td>794.30</td><td>793.11</td><td>795.49</td><td>2.38</td></tr>
-<tr><td>L</td><td>881.00</td><td>879.68</td><td>882.32</td><td>2.64</td></tr>
-<tr><td>M</td><td>977.20</td><td>975.73</td><td>978.67</td><td>2.93</td></tr>
-<tr><td>P</td><td>1,083.90</td><td>1,082.27</td><td>1,085.53</td><td>3.25</td></tr>
-<tr><td>Q</td><td>1,202.30</td><td>1,200.50</td><td>1,204.10</td><td>3.61</td></tr>
-<tr><td>R</td><td>1,333.50</td><td>1,331.50</td><td>1,335.50</td><td>4.00</td></tr>
-<tr><td>S</td><td>1,479.10</td><td>1,476.88</td><td>1,481.32</td><td>4.44</td></tr>
-</table>
+| Designation | Nominal Frequency (Hz) | Minimum  | Maximum  | Width |
+| ----------- | ---------------------- | -------- | -------- | ----- |
+| A           | 312.60                 | 312.13   | 313.07   | 0.94  |
+| B           | 346.70                 | 346.18   | 347.22   | 1.04  |
+| C           | 384.60                 | 384.02   | 385.18   | 1.15  |
+| D           | 426.60                 | 425.96   | 427.24   | 1.28  |
+| E           | 473.20                 | 472.49   | 473.91   | 1.42  |
+| F           | 524.80                 | 524.01   | 525.59   | 1.57  |
+| G           | 582.10                 | 581.23   | 582.97   | 1.75  |
+| H           | 645.70                 | 644.73   | 646.67   | 1.94  |
+| J           | 716.10                 | 715.03   | 717.17   | 2.15  |
+| K           | 794.30                 | 793.11   | 795.49   | 2.38  |
+| L           | 881.00                 | 879.68   | 882.32   | 2.64  |
+| M           | 977.20                 | 975.73   | 978.67   | 2.93  |
+| P           | 1,083.90               | 1,082.27 | 1,085.53 | 3.25  |
+| Q           | 1,202.30               | 1,200.50 | 1,204.10 | 3.61  |
+| R           | 1,333.50               | 1,331.50 | 1,335.50 | 4.00  |
+| S           | 1,479.10               | 1,476.88 | 1,481.32 | 4.44  |
+
 
 ### Table of Tone Frequencies and Derivation of the Frequencies
 
@@ -108,56 +108,24 @@ fN = log-1 / 0.045 (N-1) + 2.00/. For the first tone, N=12, second N=13, etc.
 
 <table>
 <tr>
-<th>Designation</th><th>Log Frequency</th><th>Frequency (Hz)</th>
-</tr>
-<tr>
-<td>A</td><td>2.495</td><td>312.6</td>
-<tr>
-<td>B</td><td>2.540</td><td>346.7</td>
-</tr>
-<tr>
-<td>C</td><td>2.585</td><td>384.6</td>
-</tr>
-<tr>
-<td>D</td><td>2.630</td><td>426.6</td>
-</tr>
-<tr>
-<td>E</td><td>2.675</td><td>473.2</td>
-</tr>
-<tr>
-<td>F</td><td>2.720</td><td>524.8</td>
-</tr>
-<tr>
-<td>G</td><td>2.765</td><td>582.1</td>
-</tr>
-<tr>
-<td>H</td><td>2.810</td><td>645.7</td>
-</tr>
-<tr>
-<td>J</td><td>2.855</td><td>716.1</td>
-</tr>
-<tr>
-<td>K</td><td>2.900</td><td>794.3</td>
-</tr>
-<tr>
-<td>L</td><td>2.945</td><td>881.0</td>
-</tr>
-<tr>
-<td>M</td><td>2.990</td><td>977.2</td>
-</tr>
-<tr>
-<td>P</td><td>3.035</td><td>1083.9</td>
-</tr>
-<tr>
-<td>Q</td><td>3.080</td><td>1202.3</td>
-</tr>
-<tr>
-<td>R</td><td>3.125</td><td>1333.5</td>
-</tr>
-<tr>
-<td>S</td><td>3.170</td><td>1479.1</td>
-</tr>
-</table>
+| Designation | Log Frequency | Frequency (Hz) |
+| ----------- | ------------- | -------------- |
+| A           | 2.495         | 312.6          |
+| B           | 2.540         | 346.7          |
+| C           | 2.585         | 384.6          |
+| D           | 2.630         | 426.6          |
+| E           | 2.675         | 473.2          |
+| F           | 2.720         | 524.8          |
+| G           | 2.765         | 582.1          |
+| H           | 2.810         | 645.7          |
+| J           | 2.855         | 716.1          |
+| K           | 2.900         | 794.3          |
+| L           | 2.945         | 881.0          |
+| M           | 2.990         | 977.2          |
+| P           | 3.035         | 1083.9         |
+| Q           | 3.080         | 1202.3         |
+| R           | 3.125         | 1333.5         |
+| S           | 3.170         | 1479.1         |
 
 Signal Processing
 -----------------
