@@ -58,7 +58,7 @@ The frequency of transmitted codes should be held to +/- 0.15% tolerance to
 insure proper operation of the airborne decoder.
 
 *NOTE:* The specification does not indicate the required frequency accuracy of
-the receiver. Given that [research][3][4] seems to show that doppler spreads of 
+the receiver. Given that [research][3] [4] seems to show that doppler spreads of 
 5-20 Hz over polar paths are possible, it seems that as a practical matter, 
 the receiver frequency tolerances have to be more relaxed than the transmitter 
 frequency tolerances.
@@ -205,6 +205,6 @@ References
 
 [2]: http://store.aviation-ia.com/cf/store/catalog_detail.cfm?item_id=126 "ARINC Characteristic 714-6-1990, chapter 2; August 15, 1990"
 
-[3]: https://lra.le.ac.uk/bitstream/2381/7403/3/propagation%20of%20HF%20radio%20waves.pdf "Propagation of HF radio waves over northerly paths: measurements, simulation and systems aspects", Warrington et al
+[3]: https://lra.le.ac.uk/bitstream/2381/7403/3/propagation%20of%20HF%20radio%20waves.pdf "Propagation of HF radio waves over northerly paths: measurements, simulation and systems aspects, Warrington et al"
 
-[4]: http://onlinelibrary.wiley.com/doi/10.1002/2013RS005264/full "Observations of Doppler and delay spreads on HF signals received over polar cap and trough paths at various stages of the solar cycle", Stocker, A. J., E. M. Warrington, and D. R. Siddle (2013), Radio Sci., 48, 638–645, doi:10.1002/2013RS005264.
+[4]: http://onlinelibrary.wiley.com/doi/10.1002/2013RS005264/full "Observations of Doppler and delay spreads on HF signals received over polar cap and trough paths at various stages of the solar cycle, Stocker, A. J., E. M. Warrington, and D. R. Siddle (2013), Radio Sci., 48, 638–645, doi:10.1002/2013RS005264"
