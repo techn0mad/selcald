@@ -202,6 +202,9 @@ as are fixed point DSP implementations versus floating point implementations.
 References
 ----------
 [1]: http://www.asri.aero/our-services/selcal/ "Aviation Spectrum Resources Inc. website, retrieved 3, Nov 2013"
+
 [2]: "ARINC Characteristic 714-6-1990, chapter 2; August 15, 1990"
+
 [3]: "Propagation of HF radio waves over northerly paths: measurements, simulation and systems aspects", Warrington et al
-[4]: Stocker, A. J., E. M. Warrington, and D. R. Siddle (2013), Observations of Doppler and delay spreads on HF signals received over polar cap and trough paths at various stages of the solar cycle, Radio Sci., 48, 638–645, doi:10.1002/2013RS005264.
+
+[4]: "Observations of Doppler and delay spreads on HF signals received over polar cap and trough paths at various stages of the solar cycle", Stocker, A. J., E. M. Warrington, and D. R. Siddle (2013), Radio Sci., 48, 638–645, doi:10.1002/2013RS005264.
