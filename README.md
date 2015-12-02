@@ -106,8 +106,6 @@ Note: The tones are spaced by log-1 0.045 (approximately 10.9%)
 
 fN = log-1 / 0.045 (N-1) + 2.00/. For the first tone, N=12, second N=13, etc.
 
-<table>
-<tr>
 | Designation | Log Frequency | Frequency (Hz) |
 | ----------- | ------------- | -------------- |
 | A           | 2.495         | 312.6          |
