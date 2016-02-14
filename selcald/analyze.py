@@ -39,27 +39,46 @@ def note(freq, len, amp=32767.0, rate=44100):
 
 # analyze wav file
 def analyze(file_name):
-    sig_rate, sig_noise = read(file_name)
+    try:
+        sig_rate, sig_noise = read(file_name)
+    except Exception:
+        print 'Error opening {}'.format(file_name)
+        return
+
     print 'file: ', file_name, ' rate: ', sig_rate, ' len: ', len(sig_noise)
-    sig_x = signal.decimate(sig_noise, 10)
-    rate_x = sig_rate/10
+
+    if sig_rate == 44100:
+        decimate = 12  # rate = 3675, Fmax = 1837.5 Hz
+    elif sig_rate == 48000:
+        decimate = 15  # rate = 3200, Fmax = 1600 Hz
+    elif sig_rate == 22050:
+        decimate = 6  # rate = 3675, Fmax = 1837.5 Hz
+    elif sig_rate == 11025:
+        decimate = 3  # rate = 3675, Fmax = 1837.5 Hz
+    else:
+        print 'Sample rate {} not supported.'.format(sig_rate)
+        return
+
+    sig_noise = signal.decimate(sig_noise, decimate)
+    sig_rate = sig_rate/decimate
+    print 'length after decimation: ', len(sig_noise)
     
-    sigA = note(Alpha, 0.10, rate=sig_rate)
-    sigB = note(Bravo, 0.10, rate=sig_rate)
-    sigC = note(Charlie, 0.10, rate=sig_rate)
-    sigD = note(Delta, 0.10, rate=sig_rate)
-    sigE = note(Echo, 0.10, rate=sig_rate)
-    sigF = note(Foxtrot, 0.10, rate=sig_rate)
-    sigG = note(Golf, 0.10, rate=sig_rate)
-    sigH = note(Hotel, 0.10, rate=sig_rate)
+    sigA = note(Alpha,    0.10, rate=sig_rate)
+    sigB = note(Bravo,    0.10, rate=sig_rate)
+    sigC = note(Charlie,  0.10, rate=sig_rate)
+    sigD = note(Delta,    0.10, rate=sig_rate)
+    sigE = note(Echo,     0.10, rate=sig_rate)
+    sigF = note(Foxtrot,  0.10, rate=sig_rate)
+    sigG = note(Golf,     0.10, rate=sig_rate)
+    sigH = note(Hotel,    0.10, rate=sig_rate)
     sigJ = note(Juliette, 0.10, rate=sig_rate)
-    sigK = note(Kilo, 0.10, rate=sig_rate)
-    sigL = note(Lima, 0.10, rate=sig_rate)
-    sigM = note(Mike, 0.10, rate=sig_rate)
-    sigP = note(Papa, 0.10, rate=sig_rate)
-    sigQ = note(Quebec, 0.10, rate=sig_rate)
-    sigR = note(Romeo, 0.10, rate=sig_rate)
-    sigS = note(Sierra, 0.10, rate=sig_rate)
+    sigK = note(Kilo,     0.10, rate=sig_rate)
+    sigL = note(Lima,     0.10, rate=sig_rate)
+    sigM = note(Mike,     0.10, rate=sig_rate)
+    sigP = note(Papa,     0.10, rate=sig_rate)
+    sigQ = note(Quebec,   0.10, rate=sig_rate)
+    sigR = note(Romeo,    0.10, rate=sig_rate)
+    sigS = note(Sierra,   0.10, rate=sig_rate)
     
     corrA = np.abs(signal.correlate(sig_noise, sigA, mode='same'))
     corrB = np.abs(signal.correlate(sig_noise, sigB, mode='same'))
@@ -77,7 +96,7 @@ def analyze(file_name):
     corrQ = np.abs(signal.correlate(sig_noise, sigQ, mode='same'))
     corrR = np.abs(signal.correlate(sig_noise, sigR, mode='same'))
     corrS = np.abs(signal.correlate(sig_noise, sigS, mode='same'))
-    
+
     fig, (ax_A, ax_B, ax_C, ax_D, ax_E, ax_F, ax_G, ax_H, ax_J, ax_K,
           ax_L, ax_M, ax_P, ax_Q, ax_R, ax_S) = plt.subplots(16, 1, sharex=True,
                                                              sharey=True)
@@ -169,6 +188,7 @@ def analyze(file_name):
     
     fig.set_tight_layout(True)
     fig.show()
+
 
 if __name__ == "__main__":
    analyze(sys.argv[1])
