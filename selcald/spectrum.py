@@ -59,13 +59,14 @@ def spectrum(file_name):
     plt.xlim(270, 1700)
     plt.ylim([1e-2, 1e7])
     for tone in Tones:
-        plt.axvspan(Tones[tone]*0.99,
-                    Tones[tone]*1.01, facecolor='r', alpha=0.5)
+        plt.axvline(Tones[tone], color='g')
+        plt.axvspan(Tones[tone]*0.98,
+                    Tones[tone]*1.02, facecolor='r', alpha=0.5)
     plt.grid()
 
     #plt.semilogy(sig_f, welch_spec)
     plt.loglog(sig_f, welch_spec)
-    plt.axhline(np.average(welch_spec), ls=':', color='r')
+    plt.axhline(np.average(welch_spec), color='r')
 
     plt.show()
 
