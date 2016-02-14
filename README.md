@@ -61,7 +61,10 @@ insure proper operation of the airborne decoder.
 the receiver. Given that [research][3] seems to [show][4] that doppler spreads of 
 5-20 Hz over polar paths are possible, it seems that as a practical matter, 
 the receiver frequency tolerances have to be more relaxed than the transmitter 
-frequency tolerances.
+frequency tolerances. In addition, practical experience has shown that various
+ground stations do not appear to follow the +/- 0.15% tolerance regardless. An
+initial estimate of a receiver tolerance of 2-2.5% for the tones should be
+sufficient to mitigate transmitter, receiver, and sound card frequency errors.
 
 ### Distortion
 
@@ -101,6 +104,27 @@ Note: The tones are spaced by log-1 0.045 (approximately 10.9%)
 | R           | 1,333.50               | 1,331.50 | 1,335.50 | 4.00  |
 | S           | 1,479.10               | 1,476.88 | 1,481.32 | 4.44  |
 
+
+### Received Tones
+
+| Designation | Nominal Frequency | Low 	 | High     | Width | Guard |
+| ----------- | ----------------- | ---      | ----     | ----- | ----- |
+| A           | 312.60	          | 306.35	 | 318.85   | 12.50 | 20.91 |
+| B           | 346.70	          | 339.77	 | 353.63   | 13.87 | 23.27 |
+| C           | 384.60	          | 376.91	 | 392.29   | 15.38 | 25.78 |
+| D           | 426.60	          | 418.07	 | 435.13   | 17.06 | 28.60 |
+| E           | 473.20	          | 463.74	 | 482.66   | 18.93 | 31.64 |
+| F           | 524.80	          | 514.30	 | 535.30   | 20.99 | 35.16 |
+| G           | 582.10	          | 570.46	 | 593.74   | 23.28 | 39.04 |
+| H           | 645.70	          | 632.79	 | 658.61   | 25.83 | 43.16 |
+| J           | 716.10	          | 701.78	 | 730.42   | 28.64 | 47.99 |
+| K           | 794.30	          | 778.41	 | 810.19   | 31.77 | 53.19 |
+| L           | 881.00	          | 863.38	 | 898.62   | 35.24 | 59.04 |
+| M           | 977.20	          | 957.66	 | 996.74   | 39.09 | 65.48 |
+| P           | 1,083.90	      | 1,062.22 | 1,105.58 | 43.36 | 72.68 |
+| Q           | 1,202.30	      | 1,178.25 | 1,226.35 | 48.09 | 80.48 |
+| R           | 1,333.50	      | 1,306.83 | 1,360.17 | 53.34 | 89.35 |
+| S           | 1,479.10	      | 1,449.52 | 1,508.68 | 59.16 | --    |
 
 ### Table of Tone Frequencies and Derivation of the Frequencies
 
@@ -183,31 +207,34 @@ as are fixed point DSP implementations versus floating point implementations.
 
 ### Pseudocode
 
-    Calculate number of samples per block size (<= 50 mS)
-    For each tone in the alphabet
-      Generate the template signal for cross-correlation
+    Clear the result buffer
+    Clear the tones
+    Set state to idle
+    Set the threshold to 50%
     While true
-      Clear signal table
-      set signal table row to 0
-      read audio samples for one block
-      apply windowing function to block
-      apply bandpass filter to block
-      For each tone in the alphabet
-        Convolve the input signal with the template for the tone
-        If the cross-correlation reaches the detection threshold
-          Then this letter in the alphabet has been detected
-      add tones detected to signal table
-      if two tones detected
-        For remaining number of blocks
-          increment signal table row
-          read audio samples for one block
-          For each tone in the alphabet
-            Convolve the input signal with the template for the tone
-            If the cross-correlation reaches the detection threshold
-              Then this letter in the alphabet has been detected
-          add tones detected to signal table
-        Read signal table and determine selcal code
-
+        Capture one block of audio (~100 mS)
+        Decimate it by 10
+        For each tone in the alphabet
+            Cross correlate the audio with the tone
+            If the correlation is greater than the threshold
+                Save the result in the buffer
+            Else
+                Add the correlation to the threshold and average
+        If there are > 800 mS of results in the buffer
+            If the last result was silence (no tones)
+                For each tone in the alphabet
+                    If there is a majority of results in the buffer
+                        Then the current tone is detected
+                If two tones are detected
+                    If the state is idle
+                        Set the state to two tones
+                        Save the two tones
+                    If the state is two tones
+                        Return the four tones
+                    Clear the result buffer
+                    Clear the tones
+                    Set the state to idle
+        
 References
 ----------
 [1]: http://www.asri.aero/our-services/selcal/ "Aviation Spectrum Resources Inc. website, retrieved 3, Nov 2013"
