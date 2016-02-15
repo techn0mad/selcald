@@ -6,6 +6,7 @@ import pandas as pd
 from scipy import signal
 import matplotlib.pyplot as plt
 from scipy.io.wavfile import read
+from scipy.signal import butter, lfilter
 
 Tones = dict( { 'Alpha': 312.6,
                 'Bravo': 346.7,
@@ -23,6 +24,22 @@ Tones = dict( { 'Alpha': 312.6,
                 'Quebec': 1202.3,
                 'Romeo': 1333.5,
                 'Sierra': 1479.1, } )
+
+
+# Shamelessly lifted from
+# https://scipy.github.io/old-wiki/pages/Cookbook/ButterworthBandpass
+def butter_bandpass(lowcut, highcut, fs, order=5):
+    nyq = 0.5 * fs
+    low = lowcut / nyq
+    high = highcut / nyq
+    b, a = butter(order, [low, high], btype='band')
+    return b, a
+
+
+def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
+    b, a = butter_bandpass(lowcut, highcut, fs, order=order)
+    y = lfilter(b, a, data)
+    return y
 
 # wav file spectrum
 def spectrum(file_name):
@@ -50,6 +67,8 @@ def spectrum(file_name):
         sig_noise = signal.decimate(sig_noise, decimate)
         sig_rate = sig_rate/decimate
     print 'length after decimation: ', len(sig_noise)
+
+    sig_noise = butter_bandpass_filter(sig_noise, 270, 1700, sig_rate, order=8)
 
     sig_f, welch_spec = signal.periodogram(sig_noise, sig_rate,
                                      nfft=65536, scaling='spectrum')
