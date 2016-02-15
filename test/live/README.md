@@ -59,3 +59,29 @@ These test files were obtained from the following sources:
 | noise-mid.wav   | [4]    |         | 44100 | Mid band noise                     |
 | noise-vlf.wav   | [4]    |         | 44100 | VLF band noise                     |
 | noise-high.wav  | [4]    |         | 44100 | High band noise                    |
+| aefh-am.wav     | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| aefh1-am.wav    | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| aefh2-am.wav    | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| apdm.wav        | [4]    |         | 44100 |                                    | 
+| apdm1.wav       | [4]    |         | 44100 |                                    | 
+| asbq-am.wav     | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| begp.wav        | [4]    |         | 44100 |                                    | 
+| begp1.wav       | [4]    |         | 44100 |                                    | 
+| cebd-am.wav     | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| clfm.wav        | [4]    |         | 44100 |                                    | 
+| dfjs-am.wav     | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| dlqs.wav        | [4]    |         | 44100 |                                    | 
+| dqch.wav        | [4]    |         | 44100 |                                    | 
+| dqch1.wav       | [4]    |         | 44100 |                                    | 
+| fhbd.wav        | [4]    |         | 44100 |                                    | 
+| fhbd1.wav       | [4]    |         | 44100 |                                    | 
+| fkdh-am.wav     | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| fkdh1-am.wav    | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| jkdr.wav        | [4]    |         | 44100 |                                    | 
+| jrae-am.wav     | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| jrae.wav        | [4]    |         | 44100 |                                    | 
+| jrae1-am.wav    | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| krch1-am.wav    | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| prel.wav        | [4]    |         | 44100 |                                    | 
+| qrfg-am.wav     | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+
