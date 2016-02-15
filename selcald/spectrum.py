@@ -35,19 +35,20 @@ def spectrum(file_name):
     print 'file: ', file_name, ' rate: ', sig_rate, ' len: ', len(sig_noise)
 
     if sig_rate == 44100:
-        decimate = 12  # rate = 3675, Fmax = 1837.5 Hz
+        decimate = 4  # rate = 11025, Fmax = 5512.5 Hz
     elif sig_rate == 48000:
-        decimate = 15  # rate = 3200, Fmax = 1600 Hz
+        decimate = 5  # rate = 9600, Fmax = 4800 Hz
     elif sig_rate == 22050:
-        decimate = 6  # rate = 3675, Fmax = 1837.5 Hz
+        decimate = 2  # rate = 11025, Fmax = 5512.5 Hz
     elif sig_rate == 11025:
-        decimate = 3  # rate = 3675, Fmax = 1837.5 Hz
+        decimate = 1  # rate = 11025, Fmax = 5512.5 Hz
     else:
         print 'Sample rate {} not supported.'.format(sig_rate)
         return
 
-    sig_noise = signal.decimate(sig_noise, decimate)
-    sig_rate = sig_rate/decimate
+    if decimate > 1:
+        sig_noise = signal.decimate(sig_noise, decimate)
+        sig_rate = sig_rate/decimate
     print 'length after decimation: ', len(sig_noise)
 
     sig_f, welch_spec = signal.periodogram(sig_noise, sig_rate,
