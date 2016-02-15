@@ -196,6 +196,12 @@ After considerable trolling through the Internet, and discarding many approaches
 theoretically, the ideal approach is to use [cross-correlation][5] of the input signal with
 _known_ signals to detect their presence, otherwise known as [matched filtering][6].
 
+The figure below shows the cross-correlation between the received SELCAL "JRAE" and each
+of the 16 tones in the alphabet. The lines are ordered from tone A on the top to tone
+S on the bottom, and 2.5 to 3.0 seconds of time run from left to right.
+
+![16 Channel matched filter](16channel.png "Receving SELCAL JRAE on 16 channel matched filter receiver")
+
 Some care must be taken in selecting the block size, as it is a tradeoff between 
 integrating more signal power to improve cross-correlation detection, and added 
 difficulty in detecting the silent period between the tone groups. As mentioned 
