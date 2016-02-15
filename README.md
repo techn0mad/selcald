@@ -65,6 +65,13 @@ frequency tolerances. In addition, practical experience has shown that various
 ground stations do not appear to follow the +/- 0.15% tolerance regardless. An
 initial estimate of a receiver tolerance of 2-2.5% for the tones should be
 sufficient to mitigate transmitter, receiver, and sound card frequency errors.
+This issue more or less disappears if the source of audio is an AM receiver, 
+rather than a SSB one, since the SELCALs are sent as SC-USB, they can be 
+demodulated with an AM receiver with no frequency error, other than the transmitter
+and ionospheric contributions. Based on a cursory analysis of the live 
+data available, it seems that it is quite easy to have a combination of 
+receiver frequency and soundcard clock errors that sum to 50 Hz or more. 
+This easily puts the tones out of any reasonable detection band.
 
 ### Distortion
 
@@ -107,24 +114,24 @@ Note: The tones are spaced by 10**(0.045)-1 (approximately 10.9%)
 
 ### Received Tones
 
-| Designation | Nominal Frequency | Low 	 | High     | Width | Guard |
-| ----------- | ----------------- | ---      | ----     | ----- | ----- |
-| A           | 312.60	          | 306.35	 | 318.85   | 12.50 | 20.91 |
-| B           | 346.70	          | 339.77	 | 353.63   | 13.87 | 23.27 |
-| C           | 384.60	          | 376.91	 | 392.29   | 15.38 | 25.78 |
-| D           | 426.60	          | 418.07	 | 435.13   | 17.06 | 28.60 |
-| E           | 473.20	          | 463.74	 | 482.66   | 18.93 | 31.64 |
-| F           | 524.80	          | 514.30	 | 535.30   | 20.99 | 35.16 |
-| G           | 582.10	          | 570.46	 | 593.74   | 23.28 | 39.04 |
-| H           | 645.70	          | 632.79	 | 658.61   | 25.83 | 43.16 |
-| J           | 716.10	          | 701.78	 | 730.42   | 28.64 | 47.99 |
-| K           | 794.30	          | 778.41	 | 810.19   | 31.77 | 53.19 |
-| L           | 881.00	          | 863.38	 | 898.62   | 35.24 | 59.04 |
-| M           | 977.20	          | 957.66	 | 996.74   | 39.09 | 65.48 |
-| P           | 1,083.90	      | 1,062.22 | 1,105.58 | 43.36 | 72.68 |
-| Q           | 1,202.30	      | 1,178.25 | 1,226.35 | 48.09 | 80.48 |
-| R           | 1,333.50	      | 1,306.83 | 1,360.17 | 53.34 | 89.35 |
-| S           | 1,479.10	      | 1,449.52 | 1,508.68 | 59.16 | --    |
+| Designation | Nominal Frequency | Low        | High     | Width | Guard |
+| ----------- | ----------------- | ---        | ----     | ----- | ----- |
+| A           | 312.60            | 306.35     | 318.85   | 12.50 | 20.91 |
+| B           | 346.70            | 339.77     | 353.63   | 13.87 | 23.27 |
+| C           | 384.60            | 376.91     | 392.29   | 15.38 | 25.78 |
+| D           | 426.60            | 418.07     | 435.13   | 17.06 | 28.60 |
+| E           | 473.20            | 463.74     | 482.66   | 18.93 | 31.64 |
+| F           | 524.80            | 514.30     | 535.30   | 20.99 | 35.16 |
+| G           | 582.10            | 570.46     | 593.74   | 23.28 | 39.04 |
+| H           | 645.70            | 632.79     | 658.61   | 25.83 | 43.16 |
+| J           | 716.10            | 701.78     | 730.42   | 28.64 | 47.99 |
+| K           | 794.30            | 778.41     | 810.19   | 31.77 | 53.19 |
+| L           | 881.00            | 863.38     | 898.62   | 35.24 | 59.04 |
+| M           | 977.20            | 957.66     | 996.74   | 39.09 | 65.48 |
+| P           | 1,083.90          | 1,062.22   | 1,105.58 | 43.36 | 72.68 |
+| Q           | 1,202.30          | 1,178.25   | 1,226.35 | 48.09 | 80.48 |
+| R           | 1,333.50          | 1,306.83   | 1,360.17 | 53.34 | 89.35 |
+| S           | 1,479.10          | 1,449.52   | 1,508.68 | 59.16 | --    |
 
 ### Table of Tone Frequencies and Derivation of the Frequencies
 
