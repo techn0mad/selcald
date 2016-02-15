@@ -4,6 +4,7 @@ These test files were obtained from the following sources:
 # http://liveatc.net on various dates in 2016.
 # Mr. Michael Jackson in private correspondence.
 # Captures on my own equipment
+# sigidwiki.com
 
 | File            | Source | Samples | Rate  | Notes                              |
 | ----            | ------ | ------- | ----  | -----                              |
@@ -84,4 +85,20 @@ These test files were obtained from the following sources:
 | krch1-am.wav    | [4]    |         | 44100 | Capture in AM mode, no freq error  |
 | prel.wav        | [4]    |         | 44100 |                                    | 
 | qrfg-am.wav     | [4]    |         | 44100 | Capture in AM mode, no freq error  |
+| abcd1.wav       | [5]    |         | 11025 |                                    |     
+| abcd2.wav       | [5]    |         | 11025 |                                    |
+| abcd3.wav       | [5]    |         | 11025 |                                    |
+| abcd4.wav       | [5]    |         | 11025 |                                    |
+| efgh1.wav       | [5]    |         | 11025 |                                    |
+| efgh2.wav       | [5]    |         | 11025 |                                    |
+| efgh3.wav       | [5]    |         | 11025 |                                    |
+| efgh4.wav       | [5]    |         | 11025 |                                    |
+| jklm1.wav       | [5]    |         | 11025 |                                    |     
+| jklm2.wav       | [5]    |         | 11025 |                                    |
+| jklm3.wav       | [5]    |         | 11025 |                                    |
+| jklm4.wav       | [5]    |         | 11025 |                                    |
+| pqrs1.wav       | [5]    |         | 11025 |                                    |
+| pqrs2.wav       | [5]    |         | 11025 |                                    |
+| pqrs3.wav       | [5]    |         | 11025 |                                    |
+| pqrs4.wav       | [5]    |         | 11025 |                                    |
 
