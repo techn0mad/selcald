@@ -52,13 +52,13 @@ def spectrum(file_name):
     print 'file: ', file_name, ' rate: ', sig_rate, ' len: ', len(sig_noise)
 
     if sig_rate == 44100:
-        decimate = 4  # rate = 11025, Fmax = 5512.5 Hz
+        decimate = 12  # rate = 3675, Fmax = 1837.5 Hz
     elif sig_rate == 48000:
-        decimate = 5  # rate = 9600, Fmax = 4800 Hz
+        decimate = 10  # rate = 4800, Fmax = 2400 Hz
     elif sig_rate == 22050:
-        decimate = 2  # rate = 11025, Fmax = 5512.5 Hz
+        decimate = 6  # rate = 3675, Fmax = 1837.5 Hz
     elif sig_rate == 11025:
-        decimate = 1  # rate = 11025, Fmax = 5512.5 Hz
+        decimate = 3  # rate = 3675, Fmax = 1837.5 Hz
     else:
         print 'Sample rate {} not supported.'.format(sig_rate)
         return
@@ -70,7 +70,7 @@ def spectrum(file_name):
 
     sig_noise = butter_bandpass_filter(sig_noise, 270, 1700, sig_rate, order=8)
 
-    sig_f, welch_spec = signal.periodogram(sig_noise, sig_rate,
+    sig_f, welch_spec = signal.welch(sig_noise, sig_rate, nperseg=2048,
                                      nfft=65536, scaling='spectrum')
 
     plt.title(file_name)
