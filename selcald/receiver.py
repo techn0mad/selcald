@@ -1,4 +1,4 @@
-# Run with "ipython -i --matplotlib=qt receiver.py <file>.wav"
+# Run with "ipython --matplotlib=qt receiver.py <file>.wav"
 #
 from __future__ import print_function
 import sys
@@ -7,6 +7,9 @@ from scipy import signal
 from scipy.io.wavfile import read
 from scipy.signal import butter, lfilter
 from math import log10
+
+from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 FRAME = 0.1  # Frame time in seconds
 
@@ -102,9 +105,18 @@ def receiver(file_name):
     sigR = note(Romeo, FLT_LEN, rate=sig_rate)
     sigS = note(Sierra, FLT_LEN, rate=sig_rate)
 
+    # See http://stackoverflow.com/questions/23507217/python-plotting-2d-data-on-to-3d-axes
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    y = np.arange(16)
     print(' Index     A      B      C      D      E      F      G      H      J      K      L      M      P      Q      R      S     Avg')
 
-    for index in range(0, len(sig_noise)-FLT_LEN, FLT_LEN):
+    x = range(0, len(sig_noise)-(sig_rate/10), (sig_rate/10))
+    X, Y = np.meshgrid(x, y)
+    Z = np.zeros((len(y), len(x)))
+
+    for index in range(0, len(sig_noise)-(sig_rate/10), (sig_rate/10)):
 
         corr = np.zeros(16)
 
@@ -124,6 +136,9 @@ def receiver(file_name):
         corr[13] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigQ, mode='same')).sum())
         corr[14] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigR, mode='same')).sum())
         corr[15] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigS, mode='same')).sum())
+
+        for i in range(len(y)):
+            Z[i, index/(sig_rate/10)] = corr[i]
 
         max1 = 0.0
         for tone in range(0, 16):
@@ -149,6 +164,16 @@ def receiver(file_name):
                     print('   .   ', end='')
 
         print(' {0:2.2f}'.format(avg))
+
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1000, shade=False, lw=.5)
+
+    ax.set_xlabel("Sample")
+    ax.set_ylabel("Tone")
+    ax.set_zlabel("Correlation")
+
+    ax.view_init(40, 160)
+
+    plt.show()
 
 if __name__ == "__main__":
     receiver(sys.argv[1])
