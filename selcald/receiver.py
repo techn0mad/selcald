@@ -11,26 +11,43 @@ from math import log10
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-FRAME = 0.1  # Frame time in seconds
+FRAME_TIME = 0.1  # Frame time in seconds
 
-Alpha = 312.6
-Bravo = 346.7
-Charlie = 384.6
-Delta = 426.6
-Echo = 473.2
-Foxtrot = 524.8
-Golf = 582.1
-Hotel = 645.7
-Juliette = 716.1
-Kilo = 794.3
-Lima = 881.0
-Mike = 977.2
-Papa = 1083.9
-Quebec = 1202.3
-Romeo = 1333.5
-Sierra = 1479.1
+TONES = [312.6,
+         346.7,
+         384.6,
+         426.6,
+         473.2,
+         524.8,
+         582.1,
+         645.7,
+         716.1,
+         794.3,
+         881.0,
+         977.2,
+         1083.9,
+         1202.3,
+         1333.5,
+         1479.1]
 
-FLT_LEN = 1000  # Samples
+ALPHABET = ['Alpha',
+            'Bravo',
+            'Charlie',
+            'Delta',
+            'Echo',
+            'Foxtrot',
+            'Golf',
+            'Hotel',
+            'Juliette',
+            'Kilo',
+            'Lima',
+            'Mike',
+            'Papa',
+            'Quebec',
+            'Romeo',
+            'Sierra']
+
+FILTER_LEN = 1000  # Samples
 
 # Shamelessly lifted from
 # https://scipy.github.io/old-wiki/pages/Cookbook/ButterworthBandpass
@@ -86,75 +103,54 @@ def receiver(file_name):
         sig_rate = sig_rate / decimate
     print('length after decimation: ', len(sig_noise))
 
+    frame_len = int(sig_rate * FRAME_TIME)
+    frames = (len(sig_noise) / frame_len) + 1
+
     sig_noise = butter_bandpass_filter(sig_noise, 270, 1700, sig_rate, order=8)
 
-    sigA = note(Alpha, FLT_LEN, rate=sig_rate)
-    sigB = note(Bravo, FLT_LEN, rate=sig_rate)
-    sigC = note(Charlie, FLT_LEN, rate=sig_rate)
-    sigD = note(Delta, FLT_LEN, rate=sig_rate)
-    sigE = note(Echo, FLT_LEN, rate=sig_rate)
-    sigF = note(Foxtrot, FLT_LEN, rate=sig_rate)
-    sigG = note(Golf, FLT_LEN, rate=sig_rate)
-    sigH = note(Hotel, FLT_LEN, rate=sig_rate)
-    sigJ = note(Juliette, FLT_LEN, rate=sig_rate)
-    sigK = note(Kilo, FLT_LEN, rate=sig_rate)
-    sigL = note(Lima, FLT_LEN, rate=sig_rate)
-    sigM = note(Mike, FLT_LEN, rate=sig_rate)
-    sigP = note(Papa, FLT_LEN, rate=sig_rate)
-    sigQ = note(Quebec, FLT_LEN, rate=sig_rate)
-    sigR = note(Romeo, FLT_LEN, rate=sig_rate)
-    sigS = note(Sierra, FLT_LEN, rate=sig_rate)
+    template = []
+    for tone in range(0, len(TONES)):
+        template.append(note(TONES[tone], frame_len, rate=sig_rate))
 
     # See http://stackoverflow.com/questions/23507217/python-plotting-2d-data-on-to-3d-axes
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
-    y = np.arange(16)
+    y = np.arange(len(TONES))
     print(' Index     A      B      C      D      E      F      G      H      J      K      L      M      P      Q      R      S     Avg')
 
-    x = range(0, len(sig_noise)-(sig_rate/10), (sig_rate/10))
-    X, Y = np.meshgrid(x, y)
-    Z = np.zeros((len(y), len(x)))
+    x = range(0, frames)
+    X, Y = np.meshgrid(y, x)
+    Z = np.zeros((len(x), len(y)))
 
-    for index in range(0, len(sig_noise)-(sig_rate/10), (sig_rate/10)):
+    for frame in range(0, frames):
 
-        corr = np.zeros(16)
+        beg = frame * frame_len
+        end = (frame+1) * frame_len
 
-        corr[0]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigA, mode='same')).sum())
-        corr[1]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigB, mode='same')).sum())
-        corr[2]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigC, mode='same')).sum())
-        corr[3]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigD, mode='same')).sum())
-        corr[4]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigE, mode='same')).sum())
-        corr[5]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigF, mode='same')).sum())
-        corr[6]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigG, mode='same')).sum())
-        corr[7]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigH, mode='same')).sum())
-        corr[8]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigJ, mode='same')).sum())
-        corr[9]  = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigK, mode='same')).sum())
-        corr[10] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigL, mode='same')).sum())
-        corr[11] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigM, mode='same')).sum())
-        corr[12] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigP, mode='same')).sum())
-        corr[13] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigQ, mode='same')).sum())
-        corr[14] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigR, mode='same')).sum())
-        corr[15] = log10(np.abs(signal.correlate(sig_noise[index:index+FLT_LEN], sigS, mode='same')).sum())
+        corr = np.zeros(len(TONES))
 
-        for i in range(len(y)):
-            Z[i, index/(sig_rate/10)] = corr[i]
+        for tone in range(0, len(TONES)):
+            corr[tone] = log10(np.abs(signal.correlate(sig_noise[beg:end],
+                                                       template[tone],
+                                                       mode='same')).sum())
+            Z[frame, tone] = corr[tone]
 
         max1 = 0.0
-        for tone in range(0, 16):
+        for tone in range(0, len(TONES)):
             if corr[tone] > max1:
                 max1 = corr[tone]
                 max1idx = tone
 
         max2 = 0.0
-        for tone in range(0, 16):
+        for tone in range(0, len(TONES)):
             if tone != max1idx and corr[tone] > max2:
                 max2 = corr[tone]
                 max2idx = tone
 
-        print('{0:6d}: '.format(index), end='')
+        print('{0:6d}: '.format(frame), end='')
         avg = np.mean(corr)
-        for tone in range(0, 16):
+        for tone in range(0, len(TONES)):
             if tone == max1idx or tone == max2idx:
                 print('[{0:2.2f}]'.format(corr[tone]), end='')
             else:
@@ -165,13 +161,19 @@ def receiver(file_name):
 
         print(' {0:2.2f}'.format(avg))
 
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1000, shade=False, lw=.5)
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1000, color='w', shade=True,
+                    lw=.5)
+    #ax.plot_wireframe(X, Y, Z, rstride=1, cstride=1000, lw=.5)
 
-    ax.set_xlabel("Sample")
-    ax.set_ylabel("Tone")
-    ax.set_zlabel("Correlation")
+    ax.set_title(file_name)
+    ax.set_xlabel("Tone")
+    ax.set_ylabel("Frame")
+    ax.set_zlabel("Log Correlation")
 
-    ax.view_init(40, 160)
+    ax.set_zlim(10.0, 15.0)
+    ax.set_ylim(0, frames)
+
+    ax.view_init(30, -130)
 
     plt.show()
 
