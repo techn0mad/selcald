@@ -4,6 +4,8 @@ selcald
 Selcal decoder daemon
 ---------------------
 
+![Cross-correlation Waterfall](fsek.png "Cross-correlation waterfall diagram for SELCAL FSEK")
+
 A Linux/BSD daemon that monitors an audio stream and looks for selcal 
 (Selective Calling; see <https://en.wikipedia.org/wiki/SELCAL>) calls and 
 emits a timestamp, followed by the selcal code received. The daemon is 
