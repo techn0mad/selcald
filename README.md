@@ -158,6 +158,43 @@ fN = 10**((N-1)*0.045+2). For the first tone, N=12, second N=13, etc.
 | R           | 3.125         | 1333.5         |
 | S           | 3.170         | 1479.1         |
 
+Challenges for SSB Receivers
+----------------------------
+
+It is important to note that "real" selcal receivers use AM demodulators to receive the suppressed carrier (SC)
+transmissions from the ground stations, and so for them, the audio tones received will be effectively the same
+as those transmitted by the ground stations. The tones are then decoded and used to either signal the user of
+the call, or to automatically unmute a separate SSB receiver.
+
+For hobbyist uses, there is typically only one receiver, and it is a SSB receiver. This adds additional errors
+to the received tones, based on offsets in the tuned frequency and the carrier injection (BFO) frequency.
+One possible solution to this problem is to step back from trying to determine the frequencies of the individual 
+tones and to instead verify that:
+
+1. There are two tones present
+2. The difference in frequency between the two tones matches a pair of known tones in the alphabet
+
+### Table of Tone Frequency Differences
+
+||Tone||A||B||C||D||E||F||G||H||J||K||L||M||P||Q||R||S||
+||Frequency||312.6||346.7||384.6||426.6||473.2||524.8||582.1||645.7||716.1||794.3||881.0||977.2||1083.9||1202.3||    1333.5    1479.1
+|A|312.6|0.0|
+|B|346.7|34.1|0.0|
+|C|384.6|72.0|37.9|0.0|
+|D|426.6|114.0|79.9|42.0|0.0|
+|E|473.2|160.6|126.5|88.6|46.6|0.0|
+|F|524.8|212.2|178.1|140.2|98.2|51.6|0.0|
+|G|582.1|269.5|235.4|197.5|155.5|108.9|57.3|0.0|
+|H|645.7|333.1|299.0|261.1|219.1|172.5|120.9|63.6|0.0|
+|J|716.1|403.5|369.4|331.5|289.5|242.9|191.3|134.0|70.4|0.0|
+|K|794.3|481.7|447.6|409.7|367.7|321.1|269.5|212.2|148.6|78.2|0.0|
+|L|881.0|568.4|534.3|496.4|454.4|407.8|356.2|298.9|235.3|164.9|86.7|0.0|
+|M|977.2|664.6|630.5|592.6|550.6|504.0|452.4|395.1|331.5|261.1|182.9|96.2|0.0|
+|P|1083.9|771.3|737.2|699.3|657.3|610.7|559.1|501.8|438.2|367.8|289.6|202.9|106.7|0.0|
+|Q|1202.3|889.7|855.6|817.7|775.7|729.1|677.5|620.2|556.6|486.2|408.0|321.3|225.1|118.4|0.0|
+|R|1333.5|1020.9|986.8|948.9|906.9|860.3|808.7|751.4|687.8|617.4|539.2|452.5|356.3|249.6|131.2|0.0|
+|S|1479.1|1166.5|1132.4|1094.5|1052.5|1005.9|954.3|897.0|833.4|763.0|684.8|598.1|501.9|395.2|276.8|145.6|0.0|
+
 Signal Processing
 -----------------
 
