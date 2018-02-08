@@ -5,8 +5,6 @@
 # https://github.com/j0057/setuptools-version-command
 # http://www.plope.com/Members/chrism/nose_setup_py_test
 
-ez_setup.use_setuptools()
-
 from setuptools import setup, find_packages  # Always prefer setuptools over distutils
 from codecs import open  # To use a consistent encoding
 from os import path
