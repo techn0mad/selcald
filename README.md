@@ -4,7 +4,7 @@ selcald
 Selcal decoder daemon
 ---------------------
 
-![Cross-correlation Waterfall](fsek.png "Cross-correlation waterfall diagram for SELCAL FSEK")
+![Cross-correlation Waterfall](doc/fsek.png "Cross-correlation waterfall diagram for SELCAL FSEK")
 
 A Linux/BSD daemon that monitors an audio stream and looks for selcal
 (Selective Calling; see <https://en.wikipedia.org/wiki/SELCAL>) calls and
@@ -244,7 +244,7 @@ The figure below shows the cross-correlation between the received SELCAL "JRAE" 
 of the 16 tones in the alphabet. The lines are ordered from tone A on the top to tone
 S on the bottom, and 2.5 to 3.0 seconds of time run from left to right.
 
-![16 Channel matched filter](16channel.png "Receving SELCAL JRAE on 16 channel matched filter receiver")
+![16 Channel matched filter](doc/16channel.png "Receving SELCAL JRAE on 16 channel matched filter receiver")
 
 Some care must be taken in selecting the block size, as it is a tradeoff between
 integrating more signal power to improve cross-correlation detection, and added
@@ -253,7 +253,7 @@ earlier, presumably for direct detection of the shortest possible silent period,
 blocks should be less than 50 mS, but this would result in requiring detection
 based on only 15 cycles (312.6 Hz * 0.05 sec) for the lowest frequency tone.
 
-![Cross-correlation demonstration](cross-correlation.png "Demonstration of cross-correlation")
+![Cross-correlation demonstration](doc/cross-correlation.png "Demonstration of cross-correlation")
 
 The normal source of sampled audio is the soundcard interface.
 After some digging, it seems that PortAudio would be a good choice for an audio interface
