@@ -130,5 +130,5 @@ setup(
     # explicitly overridden.
     #
     # The scripts option simply is a list of files to be handled in this way.
-    scripts = [],
+    # scripts = [],
 )
