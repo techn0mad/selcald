@@ -30,8 +30,8 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url="http://stash.impinj.com/scm/rfregress/selcald.git",
-    download_url="http://artifactory.impinj.com/artifactory/api/pypi/pypi-local/simple/selcald",
+    url="https://bitbucket.org/techn0mad/selcald",
+    download_url="https://bitbucket.org/techn0mad/selcald/get/59271168797a.zip",
 
     # Author details
     author="Larry Gadallah",
