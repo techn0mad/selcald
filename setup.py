@@ -26,7 +26,7 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version_command=( 'git describe', 'pep440-git-local' ),
 
-    description="Gen2 RFID envelope parameter testing",
+    description="Selective calling (SELCAL) decoder",
     long_description=long_description,
 
     # The project's main homepage.
