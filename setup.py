@@ -5,7 +5,6 @@
 # https://github.com/j0057/setuptools-version-command
 # http://www.plope.com/Members/chrism/nose_setup_py_test
 
-import ez_setup
 ez_setup.use_setuptools()
 
 from setuptools import setup, find_packages  # Always prefer setuptools over distutils
@@ -133,5 +132,5 @@ setup(
     # explicitly overridden.
     #
     # The scripts option simply is a list of files to be handled in this way.
-    scripts = [ 'ez_setup.py', ],
+    scripts = [],
 )
