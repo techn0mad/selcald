@@ -1,5 +1,6 @@
 # Run with "ipython -i --matplotlib=qt analyze.py <file>.wav"
 #
+from __future__ import print_function
 import sys
 import numpy as np
 # import pandas as pd
@@ -63,10 +64,10 @@ def analyze(file_name):
     try:
         sig_rate, sig_noise = read(file_name)
     except Exception:
-        print 'Error opening {}'.format(file_name)
+        print('Error opening {}'.format(file_name))
         return
 
-    print 'file: ', file_name, ' rate: ', sig_rate, ' len: ', len(sig_noise)
+    print('file: ', file_name, ' rate: ', sig_rate, ' len: ', len(sig_noise))
 
     if sig_rate == 44100:
         decimate = 4  # rate = 11025, Fmax = 5512.5 Hz
@@ -77,13 +78,13 @@ def analyze(file_name):
     elif sig_rate == 11025:
         decimate = 1  # rate = 11025, Fmax = 5512.5 Hz
     else:
-        print 'Sample rate {} not supported.'.format(sig_rate)
+        print('Sample rate {} not supported.'.format(sig_rate))
         return
 
     if decimate > 1:
         sig_noise = signal.decimate(sig_noise, decimate)
         sig_rate = sig_rate / decimate
-    print 'length after decimation: ', len(sig_noise)
+    print('length after decimation: ', len(sig_noise))
 
     sig_noise = butter_bandpass_filter(sig_noise, 270, 1700, sig_rate, order=8)
 
@@ -105,52 +106,52 @@ def analyze(file_name):
     sigS = note(Sierra, FLT_LEN, rate=sig_rate)
 
     corrA = np.abs(signal.correlate(sig_noise, sigA, mode='same'))
-    print 'A: {}'.format(log10(corrA.sum()))
+    print('A: {}'.format(log10(corrA.sum())))
 
     corrB = np.abs(signal.correlate(sig_noise, sigB, mode='same'))
-    print 'B: {}'.format(log10(corrB.sum()))
+    print('B: {}'.format(log10(corrB.sum())))
 
     corrC = np.abs(signal.correlate(sig_noise, sigC, mode='same'))
-    print 'C: {}'.format(log10(corrC.sum()))
+    print('C: {}'.format(log10(corrC.sum())))
 
     corrD = np.abs(signal.correlate(sig_noise, sigD, mode='same'))
-    print 'D: {}'.format(log10(corrD.sum()))
+    print('D: {}'.format(log10(corrD.sum())))
 
     corrE = np.abs(signal.correlate(sig_noise, sigE, mode='same'))
-    print 'E: {}'.format(log10(corrE.sum()))
+    print('E: {}'.format(log10(corrE.sum())))
 
     corrF = np.abs(signal.correlate(sig_noise, sigF, mode='same'))
-    print 'F: {}'.format(log10(corrF.sum()))
+    print('F: {}'.format(log10(corrF.sum())))
 
     corrG = np.abs(signal.correlate(sig_noise, sigG, mode='same'))
-    print 'G: {}'.format(log10(corrG.sum()))
+    print('G: {}'.format(log10(corrG.sum())))
 
     corrH = np.abs(signal.correlate(sig_noise, sigH, mode='same'))
-    print 'H: {}'.format(log10(corrH.sum()))
+    print('H: {}'.format(log10(corrH.sum())))
 
     corrJ = np.abs(signal.correlate(sig_noise, sigJ, mode='same'))
-    print 'J: {}'.format(log10(corrJ.sum()))
+    print('J: {}'.format(log10(corrJ.sum())))
 
     corrK = np.abs(signal.correlate(sig_noise, sigK, mode='same'))
-    print 'K: {}'.format(log10(corrK.sum()))
+    print('K: {}'.format(log10(corrK.sum())))
 
     corrL = np.abs(signal.correlate(sig_noise, sigL, mode='same'))
-    print 'L: {}'.format(log10(corrL.sum()))
+    print('L: {}'.format(log10(corrL.sum())))
 
     corrM = np.abs(signal.correlate(sig_noise, sigM, mode='same'))
-    print 'M: {}'.format(log10(corrM.sum()))
+    print('M: {}'.format(log10(corrM.sum())))
 
     corrP = np.abs(signal.correlate(sig_noise, sigP, mode='same'))
-    print 'P: {}'.format(log10(corrP.sum()))
+    print('P: {}'.format(log10(corrP.sum())))
 
     corrQ = np.abs(signal.correlate(sig_noise, sigQ, mode='same'))
-    print 'Q: {}'.format(log10(corrQ.sum()))
+    print('Q: {}'.format(log10(corrQ.sum())))
 
     corrR = np.abs(signal.correlate(sig_noise, sigR, mode='same'))
-    print 'R: {}'.format(log10(corrR.sum()))
+    print('R: {}'.format(log10(corrR.sum())))
 
     corrS = np.abs(signal.correlate(sig_noise, sigS, mode='same'))
-    print 'S: {}'.format(log10(corrS.sum()))
+    print('S: {}'.format(log10(corrS.sum())))
 
     fig, (ax_A, ax_B, ax_C, ax_D, ax_E, ax_F, ax_G, ax_H, ax_J, ax_K,
           ax_L, ax_M, ax_P, ax_Q, ax_R, ax_S) = plt.subplots(16, 1,

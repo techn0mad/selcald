@@ -1,5 +1,6 @@
 # Run with "ipython -i --matplotlib=qt spectrum.py <file>.wav"
 #
+from __future__ import print_function
 import sys
 import numpy as np
 # import pandas as pd
@@ -47,10 +48,10 @@ def spectrum(file_name):
     try:
         sig_rate, sig_noise = read(file_name)
     except Exception:
-        print 'Error opening {}'.format(file_name)
+        print('Error opening {}'.format(file_name))
         return
 
-    print 'file: ', file_name, ' rate: ', sig_rate, ' len: ', len(sig_noise)
+    print('file: ', file_name, ' rate: ', sig_rate, ' len: ', len(sig_noise))
 
     if sig_rate == 44100:
         decimate = 12  # rate = 3675, Fmax = 1837.5 Hz
@@ -61,13 +62,13 @@ def spectrum(file_name):
     elif sig_rate == 11025:
         decimate = 3  # rate = 3675, Fmax = 1837.5 Hz
     else:
-        print 'Sample rate {} not supported.'.format(sig_rate)
+        print('Sample rate {} not supported.'.format(sig_rate))
         return
 
     if decimate > 1:
         sig_noise = signal.decimate(sig_noise, decimate)
         sig_rate = sig_rate/decimate
-    print 'length after decimation: ', len(sig_noise)
+    print('length after decimation: ', len(sig_noise))
 
     sig_noise = butter_bandpass_filter(sig_noise, 270, 1700, sig_rate, order=8)
 

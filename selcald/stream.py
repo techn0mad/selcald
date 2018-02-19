@@ -1,5 +1,6 @@
 """Inspired by http://stackoverflow.com/questions/24974032/reading-realtime
 -audio-data-into-numpy-array."""
+from __future__ import print_function
 import pyaudio
 import numpy
 import scipy.io.wavefile as wav

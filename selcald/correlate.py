@@ -1,5 +1,6 @@
 # Run with "ipython -i --matplotlib=qt correlate.py"
 #
+from __future__ import print_function
 import numpy as np
 import pandas as pd
 from scipy import signal

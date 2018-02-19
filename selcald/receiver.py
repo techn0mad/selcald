@@ -9,7 +9,7 @@ from scipy.signal import butter, lfilter
 from math import log10
 
 from matplotlib import pyplot as plt
-# from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import Axes3D
 
 FRAME_TIME = 0.1  # Frame time in seconds
 
@@ -105,7 +105,7 @@ def receiver(file_name):
     print('length after decimation: ', len(sig_noise))
 
     frame_len = int(sig_rate * FRAME_TIME)
-    frames = (len(sig_noise) / frame_len) + 1
+    frames = int((len(sig_noise) / frame_len) + 1)
 
     sig_noise = butter_bandpass_filter(sig_noise,
                                        270,

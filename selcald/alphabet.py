@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 class Alphabet:
 
     TONES = dict({'Alpha': 312.6,
@@ -35,13 +37,13 @@ class Alphabet:
 
 if __name__ == "__main__":
     x = Alphabet()
-    print x.frequency()
-    print x.frequency('Sierra')
-    print x.frequency('Foobar')
-    print x.frequency('H')
+    print(x.frequency())
+    print(x.frequency('Sierra'))
+    print(x.frequency('Foobar'))
+    print(x.frequency('H'))
 
-    print x.tone(312.6)
-    print x.tone(1479.1)
-    print x.tone(500.0)
-    print x.tone(500.0, 0.05)
-    print x.tone(714.7)
+    print(x.tone(312.6))
+    print(x.tone(1479.1))
+    print(x.tone(500.0))
+    print(x.tone(500.0, 0.05))
+    print(x.tone(714.7))

@@ -2,6 +2,7 @@
 Calculate the optimum bin sizes to fit the selcal tone assignments
 
 '''
+from __future__ import print_function
 import bidict
 import math
 
@@ -41,7 +42,7 @@ class Tones(object):
         """
         try:
             return Tones.RED[:freq]
-        except:
+        except Exception:
             pass
 
 
@@ -110,17 +111,29 @@ class SelcalParams:
 
         """
         binsize = (samplerate / samplesize)
-        print "=== Rate: ", samplerate, " size : ", samplesize, \
-              " time: ", samplesize * 1.0 / samplerate, " ==="
+        print("=== Rate: ",
+              samplerate,
+              " size : ",
+              samplesize,
+              " time: ",
+              samplesize * 1.0 / samplerate,
+              " ===")
         for tone in range(len(self.selcal_tones)):
             self.bin_center[tone] = \
                 ((1.0 * int(self.selcal_tones[tone] / binsize)) + 0.5) \
                 * binsize
             bin_err = self.selcal_tones[tone] - self.bin_center[tone]
-            print "Tone: ", tone, " freq: ", self.selcal_tones[tone], \
-                  " bin: ", self.bin_center[tone], " err: ", bin_err, \
-                  " tol: ", self.selcal_tones[tone] * self.log_tone_tolerance
-        print
+            print("Tone: ",
+                  tone,
+                  " freq: ",
+                  self.selcal_tones[tone],
+                  " bin: ",
+                  self.bin_center[tone],
+                  " err: ",
+                  bin_err,
+                  " tol: ",
+                  self.selcal_tones[tone] * self.log_tone_tolerance)
+        print()
 
     def search_err(self, upper_bound):
         """
@@ -139,8 +152,14 @@ class SelcalParams:
                     min_err = err
                     min_size = size
 
-            print "rate: ", rate, " size ", min_size, " time ", \
-                  (min_size * 1.0 / rate), " error ", min_err
+            print("rate: ",
+                  rate,
+                  " size ",
+                  min_size,
+                  " time ",
+                  (min_size * 1.0 / rate),
+                  " error ",
+                  min_err)
             self.search_err(min_size)
 
 
@@ -150,7 +169,7 @@ if __name__ == '__main__':
         params = SelcalParams(rate)
         upper_bound = int(rate / 9)
         params.search_err(upper_bound)
-        print
+        print()
 
     # rate:  44100  size  4580  time  0.103854875283  error  -3.60366543025
     params.print_bin_error(44100, 4580)

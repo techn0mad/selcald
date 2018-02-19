@@ -1,5 +1,6 @@
 # Run with "ipython -i --matplotlib=qt correlate.py"
 #
+from __future__ import print_function
 import numpy as np
 # import pandas as pd
 from scipy import signal
@@ -24,7 +25,7 @@ freqs = range(600, 722, 2)  # Frequency range
 fig, ax = plt.subplots(1, 1, sharex=True)
 
 for length in [32, 64, 100, 128, 256]:
-    print "len = ", length
+    print("len = ", length)
 
     sig = tone(660.0, length)  # Reference tone
     response = []

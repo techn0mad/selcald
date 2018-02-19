@@ -1,5 +1,6 @@
 # Run with "ipython -i --matplotlib=qt match_frequency.py"
 #
+from __future__ import print_function
 import numpy as np
 # import pandas as pd
 from scipy import signal
@@ -22,7 +23,7 @@ def tone(freq, cycles, amp=1, rate=RATE):
 fig, ax = plt.subplots(1, 1, sharex=True)
 
 for carrier in [312, 473, 716, 1084, 1479]:
-    print "carrier = ", carrier
+    print("carrier = ", carrier)
 
     freqs = range(carrier-20, carrier+22, 2)
     sig = tone(carrier * 1.0, 2000)  # Reference tone
