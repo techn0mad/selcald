@@ -2,28 +2,28 @@
 #
 import sys
 import numpy as np
-import pandas as pd
+# import pandas as pd
 from scipy import signal
 import matplotlib.pyplot as plt
 from scipy.io.wavfile import read
 from scipy.signal import butter, lfilter
 
-Tones = dict( { 'Alpha': 312.6,
-                'Bravo': 346.7,
-                'Charlie': 384.6,
-                'Delta': 426.6,
-                'Echo': 473.2,
-                'Foxtrot': 524.8,
-                'Golf': 582.1,
-                'Hotel': 645.7,
-                'Juliette': 716.1,
-                'Kilo': 794.3,
-                'Lima': 881.0,
-                'Mike': 977.2,
-                'Papa': 1083.9,
-                'Quebec': 1202.3,
-                'Romeo': 1333.5,
-                'Sierra': 1479.1, } )
+Tones = dict({'Alpha': 312.6,
+              'Bravo': 346.7,
+              'Charlie': 384.6,
+              'Delta': 426.6,
+              'Echo': 473.2,
+              'Foxtrot': 524.8,
+              'Golf': 582.1,
+              'Hotel': 645.7,
+              'Juliette': 716.1,
+              'Kilo': 794.3,
+              'Lima': 881.0,
+              'Mike': 977.2,
+              'Papa': 1083.9,
+              'Quebec': 1202.3,
+              'Romeo': 1333.5,
+              'Sierra': 1479.1, })
 
 
 # Shamelessly lifted from
@@ -40,6 +40,7 @@ def butter_bandpass_filter(data, lowcut, highcut, fs, order=5):
     b, a = butter_bandpass(lowcut, highcut, fs, order=order)
     y = lfilter(b, a, data)
     return y
+
 
 # wav file spectrum
 def spectrum(file_name):
@@ -84,7 +85,7 @@ def spectrum(file_name):
                     Tones[tone]*1.02, facecolor='r', alpha=0.5)
     plt.grid()
 
-    #plt.semilogy(sig_f, welch_spec)
+    # plt.semilogy(sig_f, welch_spec)
     plt.loglog(sig_f, welch_spec)
     plt.axhline(np.average(welch_spec), color='r')
 
@@ -92,4 +93,4 @@ def spectrum(file_name):
 
 
 if __name__ == "__main__":
-   spectrum(sys.argv[1])
+    spectrum(sys.argv[1])

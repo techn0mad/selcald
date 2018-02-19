@@ -2,7 +2,7 @@
 #
 import sys
 import numpy as np
-import pandas as pd
+# import pandas as pd
 from scipy import signal
 import matplotlib.pyplot as plt
 from scipy.io.wavfile import read
@@ -29,6 +29,7 @@ Romeo = 1333.5
 Sierra = 1479.1
 
 FLT_LEN = 2000  # Samples
+
 
 # Shamelessly lifted from
 # https://scipy.github.io/old-wiki/pages/Cookbook/ButterworthBandpass
@@ -151,9 +152,9 @@ def analyze(file_name):
     corrS = np.abs(signal.correlate(sig_noise, sigS, mode='same'))
     print 'S: {}'.format(log10(corrS.sum()))
 
-
     fig, (ax_A, ax_B, ax_C, ax_D, ax_E, ax_F, ax_G, ax_H, ax_J, ax_K,
-          ax_L, ax_M, ax_P, ax_Q, ax_R, ax_S) = plt.subplots(16, 1, sharex=True,
+          ax_L, ax_M, ax_P, ax_Q, ax_R, ax_S) = plt.subplots(16, 1,
+                                                             sharex=True,
                                                              sharey=True)
 
     # ax_sig.plot(sig_noise)

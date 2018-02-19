@@ -1,11 +1,12 @@
 # Run with "ipython -i --matplotlib=qt match_frequency.py"
 #
 import numpy as np
-import pandas as pd
+# import pandas as pd
 from scipy import signal
 import matplotlib.pyplot as plt
 
 RATE = 44100
+
 
 # tone synthesis
 def tone(freq, cycles, amp=1, rate=RATE):
@@ -16,6 +17,7 @@ def tone(freq, cycles, amp=1, rate=RATE):
     else:
         data = np.sin(2 * np.pi * freq * t) * amp
     return data
+
 
 fig, ax = plt.subplots(1, 1, sharex=True)
 
@@ -34,12 +36,11 @@ for carrier in [312, 473, 716, 1084, 1479]:
     ax.semilogy(freqs, response, label='tone = {}'.format(carrier))
     ax.set_title('Matched filter response')
 
-    #ax.axvline(626.67, ls=':')  # Guardband markers
-    #ax.axvline(695.01, ls=':')
+    # ax.axvline(626.67, ls=':')  # Guardband markers
+    # ax.axvline(695.01, ls=':')
 
     ax.legend(loc='best')
     ax.margins(0, 0.1)
 
 fig.set_tight_layout(True)
 fig.show()
-

@@ -1,11 +1,12 @@
 # Run with "ipython -i --matplotlib=qt correlate.py"
 #
 import numpy as np
-import pandas as pd
+# import pandas as pd
 from scipy import signal
 import matplotlib.pyplot as plt
 
 RATE = 44100
+
 
 # tone synthesis
 def tone(freq, cycles, amp=1, rate=RATE):
@@ -16,6 +17,7 @@ def tone(freq, cycles, amp=1, rate=RATE):
     else:
         data = np.sin(2 * np.pi * freq * t) * amp
     return data
+
 
 freqs = range(600, 722, 2)  # Frequency range
 
@@ -43,4 +45,3 @@ for length in [32, 64, 100, 128, 256]:
 
 fig.set_tight_layout(True)
 fig.show()
-

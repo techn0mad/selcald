@@ -9,7 +9,7 @@ from scipy.signal import butter, lfilter
 from math import log10
 
 from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+# from mpl_toolkits.mplot3d import Axes3D
 
 FRAME_TIME = 0.1  # Frame time in seconds
 
@@ -48,6 +48,7 @@ ALPHABET = ['Alpha',
             'Sierra']
 
 FILTER_LEN = 1000  # Samples
+
 
 # Shamelessly lifted from
 # https://scipy.github.io/old-wiki/pages/Cookbook/ButterworthBandpass
@@ -106,18 +107,25 @@ def receiver(file_name):
     frame_len = int(sig_rate * FRAME_TIME)
     frames = (len(sig_noise) / frame_len) + 1
 
-    sig_noise = butter_bandpass_filter(sig_noise, 270, 1700, sig_rate, order=8)
+    sig_noise = butter_bandpass_filter(sig_noise,
+                                       270,
+                                       1700,
+                                       sig_rate,
+                                       order=8)
 
     template = []
     for tone in range(0, len(TONES)):
         template.append(note(TONES[tone], frame_len, rate=sig_rate))
 
-    # See http://stackoverflow.com/questions/23507217/python-plotting-2d-data-on-to-3d-axes
+    # See http://stackoverflow.com/questions/23507217/
+    #         python-plotting-2d-data-on-to-3d-axes
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
     y = np.arange(len(TONES))
-    print(' Index     A      B      C      D      E      F      G      H      J      K      L      M      P      Q      R      S     Avg')
+    print(' Index     A      B      C      D      E      F      G', end='')
+    print('      H      J      K      L      M      P      Q      R', end='')
+    print('      S     Avg')
 
     x = range(0, frames)
     X, Y = np.meshgrid(y, x)
@@ -163,7 +171,7 @@ def receiver(file_name):
 
     ax.plot_surface(X, Y, Z, rstride=1, cstride=1000, color='w', shade=True,
                     lw=.5)
-    #ax.plot_wireframe(X, Y, Z, rstride=1, cstride=1000, lw=.5)
+    # ax.plot_wireframe(X, Y, Z, rstride=1, cstride=1000, lw=.5)
 
     ax.set_title(file_name)
     ax.set_xlabel("Tone")
@@ -176,6 +184,7 @@ def receiver(file_name):
     ax.view_init(30, -130)
 
     plt.show()
+
 
 if __name__ == "__main__":
     receiver(sys.argv[1])
